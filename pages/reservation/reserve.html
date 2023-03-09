@@ -1,0 +1,59 @@
+<div class="template">
+  <h2>Reserve Car</h2>
+  <table class="table" style="max-width:1000px;">
+    <thead>
+      <tr>
+        <td>Id</td>
+        <td>Brand</td>
+        <td>Model</td>
+        <td>Price pr. day</td>
+        <td>Reserve Car</td>
+      </tr>
+    </thead>
+    <tbody id="table-rows"></tbody>
+  </table>
+  <p id="error" style="margin-top:0.5 em;"></p>
+
+  <!-- Modal -->
+  <div class="modal fade" id="reservation-modal" tabindex="-1" aria-labelledby="reservation-modal-label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="reservation-modal-label">Reserve car</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <p style="font-style: italic;">With security enabled, and if this requires a user to be logged in,
+              username is not nessecary, since the server will know who the currently logged in user is </p>
+            <div class="row">
+              <div class="col-md-3">
+                <label for="user-name">User name</label>
+              </div>
+              <div class="col-md-9">
+                <input id="user-name" placeholder="Enter your user name">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <label for="reservation-date">Date</label>
+              </div>
+              <div class="col-md-9">
+                <input id="reservation-date" type="date" placeholder="Select a reservation date">
+              </div>
+            </div>
+            <input hidden id="car-id" />
+          </div>
+          <br />
+          <p id="status">&nbsp;</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button id="btn-reservation" type="button" class="btn btn-primary">Make Reservation</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
