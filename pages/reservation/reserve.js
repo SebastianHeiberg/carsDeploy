@@ -1,6 +1,6 @@
 
 import { API_URL } from "../../settings.js"
-import { handleHttpErrors, makeOptions, sanitizeStringWithTableRows } from "../../utils.js"
+import { handleHttpErrors, makeOptions, sanitizeStringWithTableRows, encode } from "../../utils.js"
 const URL = API_URL + "/reservations"
 
 export async function initReservation() {
@@ -33,14 +33,14 @@ async function setupReservationModal(evt) {
     const target = evt.target
     const parts = target.id.split("_");
     const id = parts[1]
-    document.querySelector("#car-id").value = id
+    document.querySelector("#car-id").value = encode(id)
 }
 
 async function makeReservation(evt){
     const username = document.querySelector("#user-name").value
     const carId = document.querySelector("#car-id").value
     const date = document.querySelector("#reservation-date").value
-    const reservation = {rentalDate: date, carId: carId, username:username}
+    const reservation = {rentalDate: encode(date), carId: encode(carId), username: encode(username)}
     const options = makeOptions("POST",reservation)
 
     try{ 

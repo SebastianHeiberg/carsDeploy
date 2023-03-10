@@ -1,5 +1,5 @@
-import { API_URL } from "../../settings.js"
-import { handleHttpErrors, sanitizeStringWithTableRows, makeOptions} from "../../utils.js"
+import { API_URL} from "../../settings.js"
+import { handleHttpErrors, sanitizeStringWithTableRows, makeOptions, encode} from "../../utils.js"
 const URL = API_URL + "/members"
 
 export function initMembers(){
@@ -39,16 +39,16 @@ async function loadAllMembers() {
           if (btnAction === "details") {
             const member = await fetch(`${URL}/${id}`).then(handleHttpErrors)
             document.querySelector("#modal-title").innerText = "hello"
-            document.querySelector("#user-name").innerText = member.username
-            document.querySelector("#email").innerText = member.email
-            document.querySelector("#first-name").innerText = member.firstName
-            document.querySelector("#last-name").innerText = member.lastName
-            document.querySelector("#street").innerText = member.street
-            document.querySelector("#city").innerText = member.city
-            document.querySelector("#zip").innerText = member.zip
-            document.querySelector("#created").innerText = member.created
-            document.querySelector("#edited").innerText = member.edited
-            document.querySelector("#ranking").innerText = member.ranking
+            document.querySelector("#user-name").innerText = encode(member.username)
+            document.querySelector("#email").innerText = encode(member.email)
+            document.querySelector("#first-name").innerText = encode(member.firstName)
+            document.querySelector("#last-name").innerText = encode(member.lastName)
+            document.querySelector("#street").innerText = encode(member.street)
+            document.querySelector("#city").innerText = encode(member.city)
+            document.querySelector("#zip").innerText = encode(member.zip)
+            document.querySelector("#created").innerText = encode(member.created)
+            document.querySelector("#edited").innerText = encode(member.edited)
+            document.querySelector("#ranking").innerText = encode(member.ranking)
           } else if (btnAction === "delete") {
             const options = makeOptions("DELETE")
             try{

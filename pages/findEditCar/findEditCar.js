@@ -16,25 +16,22 @@ async function getCar () {
     const safeId = encode(id)
     const car = await fetch(URL+id).then(handleHttpErrors).then( car => {
 
-        document.querySelector("#car-id").value = car.id  
-        document.querySelector("#brand").value = car.brand  
-        document.querySelector("#model").value = car.model
-        document.querySelector("#price-pr-day").value = car.pricePrDay
-        document.querySelector("#best-discount").value = car.bestDiscount
+        document.querySelector("#car-id").value = encode(car.id)  
+        document.querySelector("#brand").value = encode(car.brand)  
+        document.querySelector("#model").value = encode(car.model)
+        document.querySelector("#price-pr-day").value = encode(car.pricePrDay)
+        document.querySelector("#best-discount").value = encode(car.bestDiscount)
     })
 }
     
 
     async function deleteCar(){
-        const id = document.querySelector("#car-id").value
+        const id = encode(document.querySelector("#car-id").value)
         const options = makeOptions("DELETE")
         try{
         await fetch(URL+id,options).then(handleHttpErrors)
     } catch (err) {
-
         document.querySelector("#car-response").innerText = err.message
-        // console.log(err.message)
-
     }
 
     document.querySelector("#car-response").innerText = "Car deleted"
@@ -49,7 +46,7 @@ async function getCar () {
         const pricePrDay = document.querySelector("#price-pr-day").value
         const bestDiscount = document.querySelector("#best-discount").value
 
-        const car = {brand: brand, model: model, pricePrDay: pricePrDay, bestDiscount: bestDiscount}
+        const car = {brand: encode(brand), model: encode(model), pricePrDay: encode(pricePrDay), bestDiscount: encode(bestDiscount)}
         const options = makeOptions('PUT',car)
         try{
             await fetch(URL+id, options).then(handleHttpErrors)
