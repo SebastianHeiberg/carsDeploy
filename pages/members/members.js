@@ -9,7 +9,9 @@ document.querySelector("#tbl-body").onclick = showUserDetails
 
 async function loadAllMembers() {
 
-    const members = await fetch(URL).then(handleHttpErrors)
+    const options = makeOptions("GET",null, true)
+    
+    const members = await fetch(URL,options).then(handleHttpErrors)
     
     const tablerows = members.map(member => `
     <tr>
@@ -37,7 +39,8 @@ async function loadAllMembers() {
        
         const btnAction = parts[1]
           if (btnAction === "details") {
-            const member = await fetch(`${URL}/${id}`).then(handleHttpErrors)
+            const options = makeOptions("GET",null,true)
+            const member = await fetch(`${URL}/${id}`,options).then(handleHttpErrors)
             document.querySelector("#modal-title").innerText = "hello"
             document.querySelector("#user-name").innerText = encode(member.username)
             document.querySelector("#email").innerText = encode(member.email)

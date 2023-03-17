@@ -10,10 +10,11 @@ import { initReservation } from "./pages/reservation/reserve.js"
 import { initMembers } from "./pages/members/members.js"
 import { initCars } from "./pages/cars/cars.js"
 import { initAddCar } from "./pages/addCar/addCar.js"
-import { initLogin } from "./pages/login/login.js"
+import { initLogin, logout } from "./pages/login/login.js"
 import { initSignup } from "./pages/signup/signup.js"
 import { initFindEditCar } from "./pages/findEditCar/findEditCar.js"
 import { initListReservationsAll } from "./pages/showReservations/reservations.js"
+import { initMemberReservations } from "./pages/memberReservations/memberReservations.js"
 
 window.addEventListener("load", async () => {
 
@@ -26,6 +27,7 @@ window.addEventListener("load", async () => {
   const templateReserve = await loadHtml("./pages/reservation/reserve.html")
   const templateReservations = await loadHtml("./pages/showReservations/reservations.html")
   const templateNotFound = await loadHtml("./pages/notFound/notFound.html")
+  const templateMemberReservations = await loadHtml("./pages/memberReservations/memberReservations.html")
 
   adjustForMissingHash()
 
@@ -55,7 +57,7 @@ window.addEventListener("load", async () => {
       },
       "/find-edit-car": (match) => {
         renderTemplate(templateFindEditCar, "content")
-        initFindEditCar(match)
+        initFindEditCar()
       },
       "/add-car": (match) => {
         renderTemplate(templateAddCar, "content")
@@ -73,13 +75,21 @@ window.addEventListener("load", async () => {
         renderTemplate(templateReservations, "content")
         initListReservationsAll()
       },
+      "/memberReservations": () => {
+        renderTemplate(templateMemberReservations, "content")
+        initMemberReservations()
+      },
       "/signup": () => {
         renderTemplate(templateSignup, "content")
         initSignup()
       },
-      "/login": (match) => {
+      "/login": () => {
         renderTemplate(templateLogin, "content")
         initLogin()
+      },
+      "/logout": () => {
+        renderTemplate(templateLogin, "content")
+        logout()
       }
     })
     .notFound(() => {
@@ -93,3 +103,5 @@ window.onerror = function (errorMsg, url, lineNumber, column, errorObj) {
   alert('Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + lineNumber
     + ' Column: ' + column + ' StackTrace: ' + errorObj);
 }
+
+

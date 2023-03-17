@@ -13,7 +13,8 @@ document.querySelector("#btn-reservation").onclick = makeReservation
 
 async function loadAllCars() {
 
-    const cars = await fetch(API_URL+"/cars").then(handleHttpErrors)
+    const options = makeOptions("GET",null,true)
+    const cars = await fetch(API_URL+"/cars",options).then(handleHttpErrors)
     
     const tablerows = cars.map(car => `
     <tr>
@@ -41,7 +42,7 @@ async function makeReservation(evt){
     const carId = document.querySelector("#car-id").value
     const date = document.querySelector("#reservation-date").value
     const reservation = {rentalDate: encode(date), carId: encode(carId), username: encode(username)}
-    const options = makeOptions("POST",reservation)
+    const options = makeOptions("POST",reservation,true)
 
     try{ 
         const newReservation = await fetch(URL, options).then(handleHttpErrors)

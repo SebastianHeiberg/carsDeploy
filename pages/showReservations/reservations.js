@@ -10,12 +10,12 @@ export async function initListReservationsAll() {
 
 
 async function loadReservations(){
+    const options = makeOptions("GET",null,true)
+    const reservations = await fetch(URL,options).then(handleHttpErrors)
+    const cars = await fetch(API_URL+"/cars",options).then(handleHttpErrors)   
 
-    const reservations = await fetch(URL).then(handleHttpErrors)
-    
-    const tablerows = await Promise.all(reservations.map(async reservation => {
-    
-    const car = await fetch(API_URL+"/cars/"+reservation.carId).then(handleHttpErrors)   
+    const tablerows = await reservations.map(reservation => {
+    const car = cars.find((car) => car.id === reservation.carId)
     return `  
     <tr>
         <td>${reservation.carId}</td>
@@ -23,7 +23,7 @@ async function loadReservations(){
         <td>${car.model}</td>
         <td>${reservation.rentalDate}</td>
         <td>${car.pricePrDay}</td>
-    </tr>` }))
+    </tr>` })
     
     document.querySelector("#tablerows").innerHTML = sanitizeStringWithTableRows(tablerows.join(""))
         

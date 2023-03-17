@@ -13,8 +13,9 @@ export function initFindEditCar(){
 
 async function getCar () {
     const id = document.querySelector("#car-id-input").value
+    const options = makeOptions("GET",null,true)
     const safeId = encode(id)
-    const car = await fetch(URL+id).then(handleHttpErrors).then( car => {
+    const car = await fetch(URL+safeId,options).then(handleHttpErrors).then( car => {
 
         document.querySelector("#car-id").value = encode(car.id)  
         document.querySelector("#brand").value = encode(car.brand)  
@@ -27,7 +28,7 @@ async function getCar () {
 
     async function deleteCar(){
         const id = encode(document.querySelector("#car-id").value)
-        const options = makeOptions("DELETE")
+        const options = makeOptions("DELETE",null,true)
         try{
         await fetch(URL+id,options).then(handleHttpErrors)
     } catch (err) {

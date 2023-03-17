@@ -17,13 +17,15 @@ async function addMember(evt) {
     const form = document.querySelector('#form');
     const formData = new FormData(form);
   
-    const person = {};
+    const person = {}
     formData.forEach((value, key) => person[key] = encode(value));
-    console.log(person)
-    const options = makeOptions('POST', person);
+
+    const options = makeOptions("POST",person,false)
+
+
   
     try {
-      const newMember = await fetch(URL, options).then(handleHttpErrors);
+      const newMember = await fetch(URL, options ).then(handleHttpErrors);
       form.reset();
       document.querySelector("#status").innerText = "SUCCESS";
     } catch (err) {

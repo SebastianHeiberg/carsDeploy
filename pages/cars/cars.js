@@ -1,5 +1,5 @@
 import { API_URL } from "../../settings.js"
-import { handleHttpErrors, sanitizeStringWithTableRows } from "../../utils.js"
+import { handleHttpErrors, makeOptions, sanitizeStringWithTableRows } from "../../utils.js"
 
  const URL = API_URL + "/cars"
 
@@ -10,7 +10,9 @@ export async function initCars() {
 
 async function loadAllCars() {
 
-const cars = await fetch(URL).then(handleHttpErrors)
+const options = makeOptions("GET",null,true)
+
+const cars = await fetch(URL,options).then(handleHttpErrors)
 
 const tablerows = cars.map(car => `
 <tr>
