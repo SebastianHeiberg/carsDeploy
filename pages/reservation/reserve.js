@@ -18,6 +18,7 @@ async function loadAllCars() {
     
     const tablerows = cars.map(car => `
     <tr>
+        <td>${car.id}</td>
         <td>${car.brand}</td>
         <td>${car.model}</td>
         <td>${car.pricePrDay}</td>

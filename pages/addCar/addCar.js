@@ -16,7 +16,19 @@ async function addCar(evt){
     const pricePrDay = document.querySelector("#price-pr-day").value
     const bestDiscount = document.querySelector("#best-discount").value
     const car = {brand: encode(brand), model: encode(model), pricePrDay: encode(pricePrDay), bestDiscount: encode(bestDiscount)}
-    const options = makeOptions('POST',car, true)
+    
+    const options = {
+        method: "POST",
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify(car)
+     }
+     
+    
+    // const options = makeOptions('POST',car, true)
    
     try{
     await fetch(URL,options).then(handleHttpErrors)
