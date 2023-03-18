@@ -18,7 +18,6 @@ async function loadAllCars() {
     
     const tablerows = cars.map(car => `
     <tr>
-        <td>${car.id}</td>
         <td>${car.brand}</td>
         <td>${car.model}</td>
         <td>${car.pricePrDay}</td>
@@ -38,7 +37,8 @@ async function setupReservationModal(evt) {
 }
 
 async function makeReservation(evt){
-    const username = document.querySelector("#user-name").value
+    // const username = document.querySelector("#user-name").value
+    const username = localStorage.getItem("user")
     const carId = document.querySelector("#car-id").value
     const date = document.querySelector("#reservation-date").value
     const reservation = {rentalDate: encode(date), carId: encode(carId), username: encode(username)}

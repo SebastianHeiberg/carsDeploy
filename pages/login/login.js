@@ -10,12 +10,18 @@ document.querySelector("#btn-login").onclick = login
 export function logout () {
     document.querySelector("#login-id").style.display="block"
     document.querySelector("#logout-id").style.display="none"
+    document.querySelector("#for-admin-cars").style.display="none"
+    document.querySelector("#for-admin-reservations").style.display="none"
+    document.querySelector("#for-admin-members").style.display="none"
+    document.querySelector("#for-members").style.display="none"
+    
     localStorage.clear()
 }
 
 
 async function login(evt) {
 
+    localStorage.clear()
     document.querySelector("#error").innerText = ""
 
 
@@ -43,17 +49,22 @@ async function login(evt) {
     document.querySelector("#logout-id").style.display="block"
     
     if(response.roles.includes("ADMIN")){
-    document.querySelector(".for-admin").style.display="block"
+        document.querySelector("#for-admin-cars").style.display="block"
+        document.querySelector("#for-admin-reservations").style.display="block"
+        document.querySelector("#for-admin-members").style.display="block"
 }
 
-if(response.roles.includes("User")){
-    document.querySelector(".for-members").style.display="block"
+if(response.roles.includes("USER")){
+    document.querySelector("#for-members").style.display="block"
 }
+
+document.querySelector("#username").value = ''
+document.querySelector("#password").value = ''
 
     
 } catch (err){
 
-    document.querySelector("#error").innerText = err.message
+    document.querySelector("#error").innerhtml = err.message
 }
 
 }

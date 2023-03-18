@@ -12,13 +12,14 @@ export async function initListReservationsAll() {
 async function loadReservations(){
     const options = makeOptions("GET",null,true)
     const reservations = await fetch(URL,options).then(handleHttpErrors)
-    const cars = await fetch(API_URL+"/cars",options).then(handleHttpErrors)   
+    const cars = await fetch(API_URL+"/cars/admin",options).then(handleHttpErrors)   
 
     const tablerows = await reservations.map(reservation => {
     const car = cars.find((car) => car.id === reservation.carId)
     return `  
     <tr>
         <td>${reservation.carId}</td>
+        <td>${reservation.username}</td>
         <td>${car.brand}</td>
         <td>${car.model}</td>
         <td>${reservation.rentalDate}</td>
