@@ -48,15 +48,15 @@
           <li class="nav-item">
             <a class="nav-link" href="/signup" data-navigo>Sign up</a>
           </li>
-          <li class="nav-item for-admin">
-            <a class="nav-link" href="/reservations" data-navigo style="none">All reservations</a>
+          <li class="nav-item for-admin" style="display: none;">
+            <a class="nav-link" href="/reservations" data-navigo>All reservations</a>
           </li>
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown for-members" style="display: none;">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">
               Reservation (M)
             </a>
-            <ul class="dropdown-menu dropdown-menu-dark for-members" aria-labelledby="navbarDropdown">
+            <ul class="dropdown-menu dropdown-menu-dark aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="/reserve-car" data-navigo>Reserve Cars</a></li>
               <li><a class="dropdown-item" href="/memberReservations" data-navigo>See your reservations</a></li>
             </ul>
